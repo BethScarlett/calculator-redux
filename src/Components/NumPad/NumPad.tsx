@@ -1,7 +1,11 @@
 import NumButton from "../NumButton/NumButton";
 import "./NumPad.scss";
 
-const NumPad = () => {
+type NumPadProps = {
+  updateDisplay: (valueToAdd: string) => void;
+};
+
+const NumPad = ({ updateDisplay }: NumPadProps) => {
   const placeholderFunc = () => {
     console.log("Function");
   };
@@ -20,7 +24,7 @@ const NumPad = () => {
       <NumButton value="5" action={placeholderFunc} />
       <NumButton value="6" action={placeholderFunc} />
       <NumButton value="-" action={placeholderFunc} />
-      <NumButton value="1" action={placeholderFunc} />
+      <NumButton value="1" action={updateDisplay} />
       <NumButton value="2" action={placeholderFunc} />
       <NumButton value="3" action={placeholderFunc} />
       <NumButton value="+" action={placeholderFunc} />

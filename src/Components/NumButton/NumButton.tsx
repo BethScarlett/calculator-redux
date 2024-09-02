@@ -2,11 +2,15 @@ import "./NumButton.scss";
 
 type NumButtonProps = {
   value: string;
-  action: () => void;
+  action: (valueToAdd: string) => void;
 };
 
 const NumButton = ({ value, action }: NumButtonProps) => {
-  return <button onClick={action}>{value}</button>;
+  const handleDecision = () => {
+    action(value);
+  };
+
+  return <button onClick={handleDecision}>{value}</button>;
 };
 
 export default NumButton;
