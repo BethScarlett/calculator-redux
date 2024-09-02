@@ -1,0 +1,13 @@
+@use "../../assets/Variables/ColourVariables.scss" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footer-link {
+  color: $C-footer-label;
+  margin: 10px 0;
+  text-align: center;
+}
