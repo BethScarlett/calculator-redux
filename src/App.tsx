@@ -1,5 +1,12 @@
+import "./App.scss";
+import Header from "./Components/Header/Header";
+
 const App = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default App;
