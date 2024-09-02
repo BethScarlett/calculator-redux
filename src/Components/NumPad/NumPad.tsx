@@ -12,7 +12,7 @@ const NumPad = ({ updateDisplay }: NumPadProps) => {
 
   return (
     <div className="num-pad">
-      <NumButton value="C" action={placeholderFunc} />
+      <NumButton value="C" action={updateDisplay} />
       <NumButton value="+-" action={placeholderFunc} />
       <NumButton value="%" action={placeholderFunc} />
       <NumButton value="/" action={placeholderFunc} />
@@ -27,7 +27,7 @@ const NumPad = ({ updateDisplay }: NumPadProps) => {
       <NumButton value="1" action={updateDisplay} />
       <NumButton value="2" action={placeholderFunc} />
       <NumButton value="3" action={placeholderFunc} />
-      <NumButton value="+" action={placeholderFunc} />
+      <NumButton value="+" action={updateDisplay} />
       <NumButton value="0" action={placeholderFunc} />
       <NumButton value="." action={placeholderFunc} />
       <NumButton value="=" action={placeholderFunc} />
