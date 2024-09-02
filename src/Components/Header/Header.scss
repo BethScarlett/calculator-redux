@@ -1,0 +1,23 @@
+@use "../../assets/Variables/ColourVariables.scss" as *;
+@use "../../assets/Variables/TextVariables.scss" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  max-width: 50dvw;
+  margin: auto;
+  text-align: center;
+  font-family: $F-heading-generic;
+
+  &__main {
+    color: $C-header-main;
+  }
+
+  &__sub {
+    color: $C-header-sub;
+  }
+}
