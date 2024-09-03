@@ -6,15 +6,11 @@ type NumPadProps = {
 };
 
 const NumPad = ({ funcToRun }: NumPadProps) => {
-  const placeholderFunc = () => {
-    console.log("Function");
-  };
-
   return (
     <div className="num-pad">
       <NumButton value="C" action={funcToRun} />
-      <NumButton value="+-" action={placeholderFunc} />
-      <NumButton value="%" action={placeholderFunc} />
+      <NumButton value="+-" action={funcToRun} />
+      <NumButton value="%" action={funcToRun} />
       <NumButton value="/" action={funcToRun} />
       <NumButton value={7} action={funcToRun} />
       <NumButton value={8} action={funcToRun} />
@@ -29,7 +25,7 @@ const NumPad = ({ funcToRun }: NumPadProps) => {
       <NumButton value={3} action={funcToRun} />
       <NumButton value="+" action={funcToRun} />
       <NumButton value={0} action={funcToRun} />
-      <NumButton value="." action={placeholderFunc} />
+      <NumButton value="." action={funcToRun} />
       <NumButton value="=" action={funcToRun} />
     </div>
   );
