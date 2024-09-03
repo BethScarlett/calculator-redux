@@ -11,6 +11,7 @@ const CalcBody = () => {
   const [numOne, setNumOne] = useState<number>(0);
   //const [numTwo, setNumTwo] = useState<number>(0);
   const [isFirstNum, setIsFirstNum] = useState<boolean>(true);
+  const [isNextPoint, setIsNextPoint] = useState<boolean>(false);
 
   const handleDetermineFunction = (valueToAdd: string | number) => {
     switch (valueToAdd) {
@@ -19,12 +20,11 @@ const CalcBody = () => {
         break;
       }
       case "+-": {
-        break;
-      }
-      case "%": {
+        setCurrentValue(currentValue * -1);
         break;
       }
       //BUG - Changing operators mid equation keeps the previous one, needs more testing
+      case "%":
       case "/":
       case "*":
       case "-":
@@ -34,6 +34,7 @@ const CalcBody = () => {
           setNumOne(currentValue);
           setCurrentValue(0);
           setCurrentOp(valueToAdd);
+          setIsNextPoint(false);
         } else {
           setNumOne(handleCalc(currentOp, numOne, currentValue));
           setCurrentValue(0);
@@ -42,6 +43,7 @@ const CalcBody = () => {
         break;
       }
       case ".": {
+        setIsNextPoint(true);
         break;
       }
       case "=": {
@@ -59,7 +61,9 @@ const CalcBody = () => {
   };
 
   const updateDisplay = (valueToAdd: number) => {
-    if (currentValue == 0) {
+    if (isNextPoint) {
+      setCurrentValue(currentValue + valueToAdd / 10);
+    } else if (currentValue == 0) {
       setCurrentValue(valueToAdd);
     } else {
       setCurrentValue(currentValue * 10 + valueToAdd);
@@ -71,7 +75,7 @@ const CalcBody = () => {
     setCurrentOp("");
     setIsFirstNum(true);
     setNumOne(0);
-    //setNumTwo(0);
+    setIsNextPoint(false);
   };
 
   return (
