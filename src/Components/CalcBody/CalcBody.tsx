@@ -2,16 +2,17 @@ import NumPad from "../NumPad/NumPad";
 import NumDisplay from "../NumDisplay/NumDisplay";
 import "./CalcBody.scss";
 import { useState } from "react";
+import { handleCalc } from "../../Utils/NumUtils";
 // import { handleCalc } from "../../Utils/NumUtils";
 
 const CalcBody = () => {
-  const [currentValue, setCurrentValue] = useState<string>("0");
-  // const [currentOp, setCurrentOp] = useState<string>("");
-  // const [numOne, setNumOne] = useState<number>(0);
-  // const [numTwo, setNumTwo] = useState<number>(0);
-  // const [isFirstNum, setIsFirstNum] = useState<boolean>(true);
+  const [currentValue, setCurrentValue] = useState<number>(0);
+  const [currentOp, setCurrentOp] = useState<string>("");
+  const [numOne, setNumOne] = useState<number>(0);
+  //const [numTwo, setNumTwo] = useState<number>(0);
+  const [isFirstNum, setIsFirstNum] = useState<boolean>(true);
 
-  const handleDetermineFunction = (valueToAdd: string) => {
+  const handleDetermineFunction = (valueToAdd: string | number) => {
     switch (valueToAdd) {
       case "C": {
         clearDisplay();
@@ -33,34 +34,48 @@ const CalcBody = () => {
         break;
       }
       case "+": {
+        if (isFirstNum) {
+          setIsFirstNum(false);
+          setNumOne(currentValue);
+          setCurrentValue(0);
+          setCurrentOp(valueToAdd);
+        } else {
+          setCurrentValue(handleCalc(currentOp, numOne, currentValue));
+          //setCurrentValue(numOne + currentValue);
+        }
         break;
       }
       case ".": {
         break;
       }
       case "=": {
+        setCurrentValue(handleCalc(currentOp, numOne, currentValue));
+        setIsFirstNum(true);
         break;
       }
       default: {
-        updateDisplay(valueToAdd);
+        if (typeof valueToAdd == "number") {
+          updateDisplay(valueToAdd);
+        }
         break;
       }
     }
   };
 
-  const updateDisplay = (valueToAdd: string) => {
-    if (currentValue == "0") {
+  const updateDisplay = (valueToAdd: number) => {
+    if (currentValue == 0) {
       setCurrentValue(valueToAdd);
     } else {
-      setCurrentValue(currentValue + valueToAdd);
+      setCurrentValue(currentValue * 10 + valueToAdd);
     }
   };
 
   const clearDisplay = () => {
-    setCurrentValue("0");
-    // setCurrentOp("");
-    // setNumOne(0);
-    // setNumTwo(0);
+    setCurrentValue(0);
+    setCurrentOp("");
+    setIsFirstNum(true);
+    setNumOne(0);
+    //setNumTwo(0);
   };
 
   return (

@@ -1,7 +1,7 @@
 import "./NumDisplay.scss";
 
 type NumDisplayProps = {
-  toDisplay: string;
+  toDisplay: number;
 };
 
 const NumDisplay = ({ toDisplay }: NumDisplayProps) => {

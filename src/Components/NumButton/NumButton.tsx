@@ -1,8 +1,8 @@
 import "./NumButton.scss";
 
 type NumButtonProps = {
-  value: string;
-  action: (valueToAdd: string) => void;
+  value: string | number;
+  action: (valueToAdd: string | number) => void;
 };
 
 const NumButton = ({ value, action }: NumButtonProps) => {
