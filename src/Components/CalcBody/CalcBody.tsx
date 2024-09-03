@@ -24,15 +24,10 @@ const CalcBody = () => {
       case "%": {
         break;
       }
-      case "/": {
-        break;
-      }
-      case "*": {
-        break;
-      }
-      case "-": {
-        break;
-      }
+      //BUG - Changing operators mid equation keeps the previous one, needs more testing
+      case "/":
+      case "*":
+      case "-":
       case "+": {
         if (isFirstNum) {
           setIsFirstNum(false);
@@ -40,7 +35,8 @@ const CalcBody = () => {
           setCurrentValue(0);
           setCurrentOp(valueToAdd);
         } else {
-          setCurrentValue(handleCalc(currentOp, numOne, currentValue));
+          setNumOne(handleCalc(currentOp, numOne, currentValue));
+          setCurrentValue(0);
           //setCurrentValue(numOne + currentValue);
         }
         break;
@@ -84,7 +80,7 @@ const CalcBody = () => {
         Use the below calculator to solve all your mathmatical equations:
       </label>
       <NumDisplay toDisplay={currentValue} />
-      <NumPad updateDisplay={handleDetermineFunction} />
+      <NumPad funcToRun={handleDetermineFunction} />
     </div>
   );
 };
