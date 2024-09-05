@@ -1,9 +1,13 @@
 import "./NumDisplay.scss";
 
-const NumDisplay = () => {
+type NumDisplayProps = {
+  toDisplay: number;
+};
+
+const NumDisplay = ({ toDisplay }: NumDisplayProps) => {
   return (
     <div className="num-display">
-      <div className="num-display__screen">0</div>
+      <div className="num-display__screen">{toDisplay}</div>
     </div>
   );
 };

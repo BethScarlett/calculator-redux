@@ -1,12 +1,16 @@
 import "./NumButton.scss";
 
 type NumButtonProps = {
-  value: string;
-  action: () => void;
+  value: string | number;
+  action: (valueToAdd: string | number) => void;
 };
 
 const NumButton = ({ value, action }: NumButtonProps) => {
-  return <button onClick={action}>{value}</button>;
+  const handleDecision = () => {
+    action(value);
+  };
+
+  return <button onClick={handleDecision}>{value}</button>;
 };
 
 export default NumButton;
