@@ -3,16 +3,17 @@ import NumDisplay from "../NumDisplay/NumDisplay";
 import "./CalcBody.scss";
 import { useState } from "react";
 import { handleCalc } from "../../Utils/NumUtils";
-// import { handleCalc } from "../../Utils/NumUtils";
 
 const CalcBody = () => {
   const [currentValue, setCurrentValue] = useState<number>(0);
   const [currentOp, setCurrentOp] = useState<string>("");
   const [numOne, setNumOne] = useState<number>(0);
-  //const [numTwo, setNumTwo] = useState<number>(0);
+  const [numTwo, setNumTwo] = useState<number>(0);
   const [isFirstNum, setIsFirstNum] = useState<boolean>(true);
   const [isNextPoint, setIsNextPoint] = useState<boolean>(false);
+  const [isFirstEquals, setIsFirstEquals] = useState<boolean>(true);
 
+  //BUG - Clicking equals after doing a percentage calculation results in 0
   const handleDetermineFunction = (valueToAdd: string | number) => {
     switch (valueToAdd) {
       case "C": {
@@ -23,8 +24,10 @@ const CalcBody = () => {
         setCurrentValue(currentValue * -1);
         break;
       }
-      //BUG - Changing operators mid equation keeps the previous one, needs more testing
-      case "%":
+      case "%": {
+        setCurrentValue(currentValue / 100);
+        break;
+      }
       case "/":
       case "*":
       case "-":
@@ -33,13 +36,12 @@ const CalcBody = () => {
           setIsFirstNum(false);
           setNumOne(currentValue);
           setCurrentValue(0);
-          setCurrentOp(valueToAdd);
           setIsNextPoint(false);
         } else {
           setNumOne(handleCalc(currentOp, numOne, currentValue));
           setCurrentValue(0);
-          //setCurrentValue(numOne + currentValue);
         }
+        setCurrentOp(valueToAdd);
         break;
       }
       case ".": {
@@ -47,17 +49,28 @@ const CalcBody = () => {
         break;
       }
       case "=": {
-        setCurrentValue(handleCalc(currentOp, numOne, currentValue));
-        setIsFirstNum(true);
+        if (isFirstEquals) {
+          setCurrentValue(handleCalc(currentOp, numOne, currentValue));
+          setIsFirstNum(true);
+          setIsFirstEquals(false);
+        } else {
+          setCurrentValue(handleCalc(currentOp, currentValue, numTwo));
+        }
         break;
       }
       default: {
         if (typeof valueToAdd == "number") {
-          updateDisplay(valueToAdd);
+          if (!isFirstEquals) {
+            setCurrentValue(valueToAdd);
+            setIsFirstEquals(true);
+          } else {
+            updateDisplay(valueToAdd);
+          }
         }
         break;
       }
     }
+    if (typeof valueToAdd == "number") setNumTwo(valueToAdd);
   };
 
   const updateDisplay = (valueToAdd: number) => {
@@ -76,6 +89,7 @@ const CalcBody = () => {
     setIsFirstNum(true);
     setNumOne(0);
     setIsNextPoint(false);
+    setIsFirstEquals(true);
   };
 
   return (
