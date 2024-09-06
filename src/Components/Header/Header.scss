@@ -8,8 +8,9 @@
 }
 
 .header {
-  max-width: 50dvw;
+  max-width: 80dvw;
   margin: auto;
+  margin-bottom: 10px;
   text-align: center;
   font-family: $F-heading-generic;
 
@@ -19,5 +20,35 @@
 
   &__sub {
     color: $C-header-sub;
+    font-size: 18px;
+
+    &--problem {
+      animation: alternateColourProblem 5s infinite alternate;
+    }
+
+    &--solution {
+      animation: alternateColourSolution 5s infinite alternate;
+    }
   }
+}
+
+
+@keyframes alternateColourProblem {
+  from {
+    color: $C-header-sub;
+  }
+  to {
+    color: $C-header-sub-problem;
+  }
+
+}
+
+@keyframes alternateColourSolution {
+  from {
+    color: $C-header-sub;
+  }
+  to {
+    color: $C-header-sub-solution;
+  }
+
 }
