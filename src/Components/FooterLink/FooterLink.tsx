@@ -11,7 +11,7 @@ const FooterLink = ({ labelText, imgSrc, imgAltDest, imgLink }: FooterLinkProps)
   return (
     <div className="footer-link">
       <label>{labelText}</label>
-      <a href={imgLink} target="_blank">
+      <a className="footer-link__image" href={imgLink} target="_blank">
         <img src={imgSrc} alt={`Link to ${imgAltDest}`} />
       </a>
     </div>

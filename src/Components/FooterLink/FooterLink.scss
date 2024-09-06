@@ -7,7 +7,13 @@
 }
 
 .footer-link {
+  display: flex;
+  flex-direction: column;
   color: $C-footer-label;
-  margin: 10px 0;
+  margin-top: 10px;
   text-align: center;
+
+  &__image {
+    scale: 0.85;
+  }
 }
