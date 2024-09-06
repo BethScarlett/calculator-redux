@@ -14,6 +14,8 @@ const CalcBody = () => {
   const [isFirstEquals, setIsFirstEquals] = useState<boolean>(true);
 
   //BUG - Clicking equals after doing a percentage calculation results in 0
+  //BUG - Pressing a second number after clicking the point doesn't apply correctly
+  //Try dividing incoming number by 10 then adding if num has point
   const handleDetermineFunction = (valueToAdd: string | number) => {
     switch (valueToAdd) {
       case "C": {

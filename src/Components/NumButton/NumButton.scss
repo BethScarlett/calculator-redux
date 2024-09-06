@@ -10,4 +10,10 @@ button {
   min-width: 75px;
   font-size: 18px;
   font-family: $F-numbutton-generic;
+  margin: 2px 0;
+
+  &:hover {
+    transition: all 0.15s linear;
+    box-shadow: inset 1px 1px 1px 1px black;
+  }
 }
