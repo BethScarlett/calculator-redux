@@ -1,3 +1,5 @@
+@use "../../assets/Variables/ColourVariables.scss" as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -5,8 +7,14 @@
 }
 
 .num-pad {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin: auto;
+  padding: 3px 2px;
+  min-height: 250px;
   width: 95dvw;
-  border: 2px solid green;
-  background-color: gray;
+  border: 3px solid $C-calcBody-border;
+  border-radius: 4px;
+  background-color: $C-numpad-background;
 }

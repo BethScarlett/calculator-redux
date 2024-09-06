@@ -1,3 +1,6 @@
+@use "../../assets/Variables/ColourVariables.scss" as *;
+@use "../../assets/Variables/TextVariables.scss" as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +9,11 @@
 
 .num-display {
   margin: auto;
+  margin-bottom: 2px;
   width: 95dvw;
-  border: 2px solid green;
-  background-color: gray;
+  border: 2px solid $C-calcBody-border;
+  border-radius: 4px;
+  background-color: $C-numpad-background;
+  font-size: 24px;
+  font-family: $F-numdisplay;
 }
