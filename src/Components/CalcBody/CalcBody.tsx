@@ -9,13 +9,11 @@ const CalcBody = () => {
   const [currentOp, setCurrentOp] = useState<string>("");
   const [numOne, setNumOne] = useState<number>(0);
   const [numTwo, setNumTwo] = useState<number>(0);
+  const [pointNums, setPointNums] = useState<number>(10);
   const [isFirstNum, setIsFirstNum] = useState<boolean>(true);
   const [isNextPoint, setIsNextPoint] = useState<boolean>(false);
   const [isFirstEquals, setIsFirstEquals] = useState<boolean>(true);
 
-  //BUG - Clicking equals after doing a percentage calculation results in 0
-  //BUG - Pressing a second number after clicking the point doesn't apply correctly
-  //Try dividing incoming number by 10 then adding if num has point
   const handleDetermineFunction = (valueToAdd: string | number) => {
     switch (valueToAdd) {
       case "C": {
@@ -77,7 +75,8 @@ const CalcBody = () => {
 
   const updateDisplay = (valueToAdd: number) => {
     if (isNextPoint) {
-      setCurrentValue(currentValue + valueToAdd / 10);
+      setCurrentValue(currentValue + valueToAdd / pointNums);
+      setPointNums(pointNums * 10);
     } else if (currentValue == 0) {
       setCurrentValue(valueToAdd);
     } else {
@@ -92,6 +91,7 @@ const CalcBody = () => {
     setNumOne(0);
     setIsNextPoint(false);
     setIsFirstEquals(true);
+    setPointNums(10);
   };
 
   return (
